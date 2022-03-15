@@ -9,7 +9,7 @@ build:
 
 deploy:
   image: bitnami/kubectl:latest
-  stage: deploy-tb
+  stage: deploy
   only:
     - master
   script:

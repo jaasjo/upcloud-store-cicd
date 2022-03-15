@@ -1,9 +1,13 @@
-build-job:
+stages:
+  - build
+  - deploy
+
+build:
   stage: build
   script:
     - echo "Hello, $GITLAB_USER_LOGIN!"
 
-deploy-tb:
+deploy:
   image: bitnami/kubectl:latest
   stage: deploy-tb
   only:

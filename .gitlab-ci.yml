@@ -13,4 +13,4 @@ deploy:
   only:
     - master
   script:
-    - kubectl apply -f k8s/simple-go-server.yaml
+    - kubectl apply -f k8s/simple-go-server.yaml -n default

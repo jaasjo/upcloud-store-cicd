@@ -13,4 +13,5 @@ deploy:
   only:
     - master
   script:
-    - kubectl apply -f k8s/simple-go-server.yaml -n default
+     - kubectl create ns test123
+#    - kubectl apply -f k8s/simple-go-server.yaml -n default

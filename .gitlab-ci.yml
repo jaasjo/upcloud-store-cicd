@@ -14,3 +14,4 @@ deploy:
     - master
   script:
     - kubectl apply -f k8s/simple-go-server.yaml
+    

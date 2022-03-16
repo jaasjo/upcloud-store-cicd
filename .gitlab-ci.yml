@@ -1,3 +1,7 @@
+job:
+  tags:
+    - k8s
+
 stages:
   - build
   - deploy

@@ -13,5 +13,5 @@ deploy:
   only:
     - master
   script:
-    - kubectl run test --image=nginx
+    - kubectl run test1 --image=nginx
 #    - kubectl apply -f k8s/simple-go-server.yaml -n default

@@ -7,7 +7,7 @@ deploy:
   only:
     - master
   script:
-    - repo=$(cat $TRIGGER_PAYLOAD | python3 -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
+    - repo=$(cat $TRIGGER_PAYLOAD | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
     - export repo
     - cat $repo
   #  - kubectl apply -f k8s/simple-go-server.yaml

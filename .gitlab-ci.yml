@@ -1,5 +1,5 @@
 variables:
-  repo: ""
+  repo: "{type:PUSH_ARTIFACT,occur_at:1647541212,operator:tbs,event_data:{resources:[{digest:sha256:67fcece56ecc7415af65bae342f7c2ea9e08d41aa49a5fab954a708c13876559,tag:b3.20220317.181935,resource_url:172.16.228.29/demoapp/products:b3.20220317.181935}],repository:{date_created:1647540874,name:products,namespace:demoapp,repo_full_name:demoapp/products,repo_type:public}},id:9,ref:master,variables:{}}"
 
 stages:
   - preprocess

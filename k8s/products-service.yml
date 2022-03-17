@@ -3,8 +3,10 @@ kind: Service
 metadata:
   name: products
 spec:
-  type: ClusterIP 
+  type: LoadBalancer
   ports:
-  - port: 8082
+  - port: 80
+    targetPort: 8082
+    protocol: TCP
   selector:
     app: products

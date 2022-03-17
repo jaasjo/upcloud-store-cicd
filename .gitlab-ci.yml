@@ -16,6 +16,6 @@ deploy:
     - kubectl apply -f k8s/simple-go-server.yaml
     - job_id=id_${CI_JOB_ID}
     - export job_id
-    - echo "${CI_JOB_ID}"
-    - echo "${CI_JOB_STARTED_AT}"
-    - kubectl patch deployment simple-go-server -p '{"spec":{"template":{"metadata":{"labels":{"CI_JOB_ID":"$job_id"}}}}}'
+    - echo $job_id
+    - echo "$job_id"
+    - kubectl patch deployment simple-go-server -p '{"spec":{"template":{"metadata":{"labels":{"CI_JOB_ID":$job_id}}}}}'

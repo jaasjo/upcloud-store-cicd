@@ -1,5 +1,15 @@
+variables:
+  repo: ""
+
 stages:
+  - preprocess
   - deploy
+
+preprocess:
+  image: python:latest
+  stage: preprocess
+  script:
+    - $repo=$(cat $TRIGGER_PAYLOAD | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
 
 deploy:
   image: bitnami/kubectl:latest
@@ -7,8 +17,6 @@ deploy:
   only:
     - master
   script:
-    - repo=$(cat $TRIGGER_PAYLOAD | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
-    - export repo
     - cat $repo
   #  - kubectl apply -f k8s/simple-go-server.yaml
   #  - job_id="id${CI_JOB_ID}"

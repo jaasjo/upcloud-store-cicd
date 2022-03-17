@@ -1,5 +1,5 @@
 variables:
-  JOB: "${CI_JOB_ID}"
+  JOB: "A + ${CI_JOB_ID}"
 
 stages:
   - build

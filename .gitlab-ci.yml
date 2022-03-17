@@ -14,5 +14,6 @@ deploy:
     - master
   script:
     - kubectl apply -f k8s/simple-go-server.yaml
-    - echo "$CI-JOB-ID"
-  #  - kubectl patch deployment simple-go-server -p '{"spec":{"template":{"metadata":{"labels":{"CI-JOB_ID":'"$CI-JOB-ID"'}}}}}'
+    - echo "$CI_JOB_ID"
+    - echo "$CI_JOB_STARTED_AT"
+    - kubectl patch deployment simple-go-server -p '{"spec":{"template":{"metadata":{"labels":{"CI-JOB_ID":"$CI_JOB_ID"}}}}}'

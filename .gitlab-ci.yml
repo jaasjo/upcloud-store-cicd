@@ -5,7 +5,7 @@ stages:
 build:
   stage: build
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
+    - echo "Hello, $GITLAB_USER_LOGIN, building!"
 
 deploy:
   image: bitnami/kubectl:latest
@@ -14,4 +14,4 @@ deploy:
     - master
   script:
     - kubectl apply -f k8s/simple-go-server.yaml
-    
+    - kubectl patch deployment simple-go-server -p "{\"spec\": {\"template\": {\"metadata\": { \"labels\": {  \"CI-date\": \"$(date +%s)\"}}}}}"

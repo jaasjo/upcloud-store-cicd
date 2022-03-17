@@ -18,4 +18,4 @@ deploy:
     - export job_id
     - echo $job_id
     - echo "$job_id"
-    - kubectl patch deployment simple-go-server -p '{"spec":{"template":{"metadata":{"labels":{"CI_JOB_ID":"$job_id"}}}}}'
+    - kubectl patch deployment simple-go-server -p '{"spec":{"template":{"metadata":{"labels":{"CI_JOB_ID":"'$job_id'"}}}}}'

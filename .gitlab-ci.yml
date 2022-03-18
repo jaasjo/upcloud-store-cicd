@@ -7,6 +7,8 @@ stages:
   - deploy
 
 preprocess:
+  before_script:
+    - apk add jq
   image: python:latest
   stage: preprocess
   script:

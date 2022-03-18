@@ -12,9 +12,9 @@ preprocess:
   script:
     - python --version
     - echo "$repo"
-    - $repo="test"
+    - repo="test"
     - echo "$repo"
-    - $repo=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
+    - repo=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
     - echo "$repo"
 
 
@@ -24,7 +24,7 @@ deploy:
   only:
     - master
   script:
-    - cat $repo
+    - echo "$repo"
   #  - kubectl apply -f k8s/simple-go-server.yaml
   #  - job_id="id${CI_JOB_ID}"
   #  - export job_id

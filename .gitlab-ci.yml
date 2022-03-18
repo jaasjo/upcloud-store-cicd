@@ -27,9 +27,9 @@ deploy:
   script:
     - depl="$(cat repo.txt)-deployment.yml"
     - service="$(cat repo.txt)-service.yml"
-    - kubectl apply -f k8s/"'$depl'"
-    - kubectl apply -f k8s/"'$depl'"
-    - kubectl patch deployment "'$(cat repo.txt)'" -p '{"spec":{"template":{"metadata":{"labels":{"CI_JOB_ID":"'$CI_JOB_ID'"}}}}}'
+    - kubectl apply -f k8s/"$depl"
+    - kubectl apply -f k8s/"$depl"
+    - kubectl patch deployment "$(cat repo.txt)" -p '{"spec":{"template":{"metadata":{"labels":{"CI_JOB_ID":"'$CI_JOB_ID'"}}}}}'
   #  - job_id="id${CI_JOB_ID}"
   #  - export job_id
   #  - kubectl patch deployment simple-go-server -p '{"spec":{"template":{"metadata":{"labels":{"CI_JOB_ID":"'$CI_JOB_ID'"}}}}}'

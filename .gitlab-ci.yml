@@ -12,6 +12,8 @@ preprocess:
   script:
     - python --version
     #- echo $payload | python -mjson.tool
+    - cat $TRIGGER_PAYLOAD
+    - cat "$TRIGGER_PAYLOAD"
     - echo $TRIGGER_PAYLOAD | python -mjson.tool
   #  - echo '$payload' | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])"
   #  - echo '$TRIGGER_PAYLOAD' | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])"

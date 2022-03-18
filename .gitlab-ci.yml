@@ -10,7 +10,10 @@ preprocess:
   image: python:latest
   stage: preprocess
   script:
-    - echo '$TRIGGER_PAYLOAD' | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])"
+    - echo $payload
+    - echo "$payload"
+    - echo '$payload' | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])"
+  #  - echo '$TRIGGER_PAYLOAD' | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])"
 
 deploy:
   image: bitnami/kubectl:latest

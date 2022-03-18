@@ -8,7 +8,7 @@ stages:
 
 preprocess:
   before_script:
-    - apk add jq
+    - apt install jq
   image: python:latest
   stage: preprocess
   script:

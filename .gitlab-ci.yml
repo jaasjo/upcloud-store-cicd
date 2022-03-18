@@ -11,13 +11,12 @@ preprocess:
   stage: preprocess
   script:
     - python --version
-    #- echo $payload | python -mjson.tool
-    - cat $TRIGGER_PAYLOAD
-    - cat "$TRIGGER_PAYLOAD"
-    - cat $TRIGGER_PAYLOAD | python -mjson.tool
-    - cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])"
-  #  - echo '$payload' | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])"
-  #  - echo '$TRIGGER_PAYLOAD' | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])"
+    - echo "$repo"
+    - $repo="test"
+    - echo "$repo"
+    - $repo=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
+    - echo "$repo"
+
 
 deploy:
   image: bitnami/kubectl:latest

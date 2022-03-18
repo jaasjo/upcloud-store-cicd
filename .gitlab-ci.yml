@@ -1,7 +1,3 @@
-variables:
-  #payload: "{"type":"PUSH_ARTIFACT","occur_at":1647545657,"operator":"tbs","event_data":{"resources":[{"digest":"sha256:bc768ff13e3de4c9f2ee43a5635c780845bc95e905f8f896020c29d6c3e34791","tag":"latest","resource_url":"172.16.228.29/demoapp/products:latest"}],"repository":{"date_created":1647540874,"name":"products","namespace":"demoapp","repo_full_name":"demoapp/products","repo_type":"public"}},"id":"9","ref":"master","variables":{}}"
-  repo: ""
-
 stages:
   - preprocess
   - deploy
@@ -29,7 +25,4 @@ deploy:
     - service="$(cat repo.txt)-service.yml"
     - kubectl apply -f k8s/"$service"
     - kubectl apply -f k8s/"$depl"
-    - kubectl patch deployment "$(cat repo.txt)" -p '{"spec":{"template":{"metadata":{"labels":{"CI_JOB_ID":"'$CI_JOB_ID'"}}}}}'
-  #  - job_id="id${CI_JOB_ID}"
-  #  - export job_id
-  #  - kubectl patch deployment simple-go-server -p '{"spec":{"template":{"metadata":{"labels":{"CI_JOB_ID":"'$CI_JOB_ID'"}}}}}'
+    - kubectl patch deployment "$(cat repo.txt)" -p '{"spec":{"template":{"metadata":{"labels":{"CI_PIPELINE_ID":"'$CI_PIPELINE_ID'"}}}}}'

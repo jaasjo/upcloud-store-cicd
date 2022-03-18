@@ -7,15 +7,12 @@ stages:
   - deploy
 
 preprocess:
-  #before_script:
-  #  - apt install jq
   image: python:latest
   stage: preprocess
   script:
-  #  - jq --version
     - python --version
-    - echo $payload | python -mjson.tool | grep event_data
-    - echo "$payload"
+    - echo $payload | python -mjson.tool
+    - echo $TRIGGER_PAYLOAD | python -mjson.tool
   #  - echo '$payload' | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])"
   #  - echo '$TRIGGER_PAYLOAD' | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])"
 

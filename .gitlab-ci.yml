@@ -25,7 +25,7 @@ deploy:
   only:
     - master
   script:
-    - depl="deployment-$(cat repo.txt).yaml"
+    - depl="$(cat repo.txt)-deployment.yml"
     - kubectl apply -f k8s/"'$depl'"
   #  - job_id="id${CI_JOB_ID}"
   #  - export job_id

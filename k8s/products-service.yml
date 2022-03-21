@@ -6,6 +6,8 @@ spec:
   type: ClusterIP
   clusterIP: 10.98.203.41
   ports:
-  - port: 8082
+  - targetport: 8082
+    port: 80
+    protocol: TCP
   selector:
     app: products

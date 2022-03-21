@@ -3,11 +3,9 @@ kind: Service
 metadata:
   name: orders
 spec:
-  type: LoadBalancer
-  loadBalancerIP: 172.16.228.71
+  type: ClusterIP
+  clusterIP: 10.101.189.238
   ports:
-  - port: 80
-    targetPort: 8081
-    protocol: TCP
+  - port: 8081
   selector:
     app: orders

@@ -6,6 +6,8 @@ spec:
   type: ClusterIP
   clusterIP: 10.101.189.238
   ports:
-  - port: 8081
+  - targetPort: 8081
+    port: 80
+    procotol: TCP
   selector:
     app: orders

@@ -3,11 +3,9 @@ kind: Service
 metadata:
   name: products
 spec:
-  type: LoadBalancer
-  loadBalancerIP: 172.16.228.70
+  type: ClusterIP
+  clusterIP: 10.98.203.41
   ports:
-  - port: 80
-    targetPort: 8082
-    protocol: TCP
+  - port: 8082
   selector:
     app: products

@@ -22,8 +22,10 @@ preprocess:
 deploy:
   dependencies:
     - preprocess
+  variables:
+    TAG: $(cat tag.txt)
   rules:
-    - if: '$(cat tag.txt) == "latest"'
+    - if: '$TAG != "latest"'
   image: bitnami/kubectl:latest
   stage: deploy
   script:

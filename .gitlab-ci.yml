@@ -33,5 +33,5 @@ deploy:
     - service="$(cat repo.txt)-service.yml"
     - kubectl apply -f k8s/"$service"
     - kubectl apply -f k8s/"$depl"
-    - kubectl set image deployment.v1.apps/"$(cat repo.txt)" "$(cat repo.txt)"="$(cat url.txt)"
+    - kubectl set image deployment.v1.apps/"$(cat repo.txt)" *="$(cat url.txt)"
     #- kubectl patch deployment "$(cat repo.txt)" -p '{"spec":{"template":{"metadata":{"labels":{"CI_PIPELINE_ID":"'$CI_PIPELINE_ID'"}}}}}'

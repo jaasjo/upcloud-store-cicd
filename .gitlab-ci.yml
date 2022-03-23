@@ -23,7 +23,7 @@ deploy:
   dependencies:
     - preprocess
   rules:
-    - if: $(cat tag.txt) != 'latest'
+    - if: "$(cat tag.txt) != 'latest'"
       when: never
   image: bitnami/kubectl:latest
   stage: deploy

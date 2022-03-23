@@ -23,7 +23,8 @@ deploy:
   dependencies:
     - preprocess
   variables:
-    TAG: "cat tag.txt"
+    TAG: "$(cat tag.txt)"
+    TAG2: "cat tag.txt"
   rules:
     - if: '$TAG != "latest"'
   image: bitnami/kubectl:latest
@@ -33,9 +34,7 @@ deploy:
     - service="$(cat repo.txt)-service.yml"
     - kubectl apply -f k8s/"$service"
     - kubectl apply -f k8s/"$depl"
-    - cat repo.txt
-    - cat url.txt 
     - echo $TAG
-    - cat tag.txt
+    - echo $TAG2
     - kubectl set image deployment.v1.apps/"$(cat repo.txt)" "$(cat repo.txt)"="$(cat url.txt)"
     #- kubectl patch deployment "$(cat repo.txt)" -p '{"spec":{"template":{"metadata":{"labels":{"CI_PIPELINE_ID":"'$CI_PIPELINE_ID'"}}}}}'

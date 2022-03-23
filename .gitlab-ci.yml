@@ -9,7 +9,7 @@ preprocess:
     - python --version
     - repo=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
     - tag=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['tag'])")
-    - ulr=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['resource_url'])")
+    - url=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['resource_url'])")
     - echo "$repo" >> repo.txt
     - echo "$url" >> url.txt
     - echo "$tag" >> tag.txt
@@ -35,5 +35,7 @@ deploy:
     - kubectl apply -f k8s/"$depl"
     - cat repo.txt
     - cat url.txt 
-    - kubectl set image deployment.v1.apps/"$(cat repo.txt)" *="$(cat url.txt)"
+    - echo $TAG
+    - cat tag.txt
+    - kubectl set image deployment.v1.apps/"$(cat repo.txt)" "$(cat repo.txt)"="$(cat url.txt)"
     #- kubectl patch deployment "$(cat repo.txt)" -p '{"spec":{"template":{"metadata":{"labels":{"CI_PIPELINE_ID":"'$CI_PIPELINE_ID'"}}}}}'

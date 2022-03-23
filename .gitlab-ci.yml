@@ -22,15 +22,11 @@ preprocess:
 deploy:
   dependencies:
     - preprocess
-  variables:
-    TAG: $(cat tag.txt)
   rules:
-    - if: $TAG != 'latest'
+    - if: $(cat tag.txt) != 'latest'
       when: never
   image: bitnami/kubectl:latest
   stage: deploy
-  only:
-    - master
   script:
     - depl="$(cat repo.txt)-deployment.yml"
     - service="$(cat repo.txt)-service.yml"

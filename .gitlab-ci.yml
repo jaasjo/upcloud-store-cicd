@@ -28,7 +28,7 @@ deploy:
   image: bitnami/kubectl:latest
   stage: deploy
   script:
-    - [ "$TAG" == "latest" ] && exit 0
+    - '[ "$TAG" == "latest" ] && exit 0'
     - depl="$(cat repo.txt)-deployment.yml"
     - service="$(cat repo.txt)-service.yml"
     - kubectl apply -f k8s/"$service"

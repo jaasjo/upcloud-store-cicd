@@ -11,6 +11,8 @@ preprocess:
     - tag=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['tag'])")
     - url=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['resource_url'])")
     - echo "TAG=$tag" >> preprocess.env
+    - echo "REPO=$repo" >> preprocess.env
+    - echo "URL=$url" >> preprocess.env
     - echo "$repo" >> repo.txt
     - echo "$url" >> url.txt
     - echo "$tag" >> tag.txt
@@ -31,8 +33,9 @@ deploy:
     - '[ "$TAG" == "latest" ] && exit 0'
     - depl="$(cat repo.txt)-deployment.yml"
     - service="$(cat repo.txt)-service.yml"
+    - echo $service
+    - echo "$REPO-service.yaml"
     - kubectl apply -f k8s/"$service"
     - kubectl apply -f k8s/"$depl"
-    - echo $TAG
     - kubectl set image deployment.v1.apps/"$(cat repo.txt)" "$(cat repo.txt)"="$(cat url.txt)"
     #- kubectl patch deployment "$(cat repo.txt)" -p '{"spec":{"template":{"metadata":{"labels":{"CI_PIPELINE_ID":"'$CI_PIPELINE_ID'"}}}}}'

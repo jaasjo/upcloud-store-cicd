@@ -8,7 +8,9 @@ preprocess:
   script:
     - python --version
     - repo=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
+    - tag=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['tag'])")
     - echo "$repo" >> repo.txt
+    - echo "$tag"
   artifacts:
     paths:
       - repo.txt

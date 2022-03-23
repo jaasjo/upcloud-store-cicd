@@ -9,15 +9,22 @@ preprocess:
     - python --version
     - repo=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
     - tag=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['tag'])")
+    - ulr=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['resource_url'])")
     - echo "$repo" >> repo.txt
-    - echo "$tag"
+    - echo "$url" >> url.txt
+    - echo "$tag" >> tag.txt
   artifacts:
     paths:
       - repo.txt
+      - url.txt
+      - tag.txt
 
 deploy:
   dependencies:
     - preprocess
+  rules:
+    - if: $(cat tag.txt) != 'latest'
+      when: never
   image: bitnami/kubectl:latest
   stage: deploy
   only:
@@ -27,4 +34,5 @@ deploy:
     - service="$(cat repo.txt)-service.yml"
     - kubectl apply -f k8s/"$service"
     - kubectl apply -f k8s/"$depl"
-    - kubectl patch deployment "$(cat repo.txt)" -p '{"spec":{"template":{"metadata":{"labels":{"CI_PIPELINE_ID":"'$CI_PIPELINE_ID'"}}}}}'
+    - kubectl set image deployment.v1.apps/"$(cat repo.txt)" "$(cat repo.txt)"="$(cat url.txt)"
+    #- kubectl patch deployment "$(cat repo.txt)" -p '{"spec":{"template":{"metadata":{"labels":{"CI_PIPELINE_ID":"'$CI_PIPELINE_ID'"}}}}}'

@@ -13,14 +13,7 @@ preprocess:
     - echo "TAG=$tag" >> preprocess.env
     - echo "REPO=$repo" >> preprocess.env
     - echo "URL=$url" >> preprocess.env
-    - echo "$repo" >> repo.txt
-    - echo "$url" >> url.txt
-    - echo "$tag" >> tag.txt
   artifacts:
-    paths:
-      - repo.txt
-      - url.txt
-      - tag.txt
     reports:
       dotenv: preprocess.env
 
@@ -31,11 +24,6 @@ deploy:
   stage: deploy
   script:
     - '[ "$TAG" == "latest" ] && exit 0'
-    - depl="$(cat repo.txt)-deployment.yml"
-    - service="$(cat repo.txt)-service.yml"
-    - echo $service
-    - echo "$REPO-service.yml"
-    #- #kubectl apply -f k8s/"$service"
     - kubectl apply -f k8s/"$REPO-service.yml"
     - kubectl apply -f k8s/"$REPO-deployment.yml"
     - kubectl set image deployment.v1.apps/"$REPO" "$REPO"="$URL"

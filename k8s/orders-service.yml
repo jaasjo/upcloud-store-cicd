@@ -4,7 +4,7 @@ metadata:
   name: orders
 spec:
   type: LoadBalancer
-  loadBalancerIP: 172.16.228.70
+  loadBalancerIP: 10.10.10.228
   ports:
   - targetPort: 8081
     port: 80

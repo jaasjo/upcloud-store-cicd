@@ -3,6 +3,8 @@ stages:
   - deploy
 
 preprocess:
+  tags:
+    - tkgm
   image: python:latest
   stage: preprocess
   script:
@@ -18,6 +20,8 @@ preprocess:
       dotenv: preprocess.env
 
 deploy:
+  tags:
+    - tkgm
   dependencies:
     - preprocess
   image: bitnami/kubectl:latest

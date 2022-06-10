@@ -4,7 +4,7 @@ metadata:
   name: products
 spec:
   type: LoadBalancer
-  loadBalancerIP: 10.10.10.229
+  loadBalancerIP: 192.168.11.71
   ports:
   - targetPort: 8082
     port: 80

@@ -4,11 +4,12 @@ stages:
 
 preprocess:
   tags:
-    - tkgs
+    - tkgm
   image: python:latest
   stage: preprocess
   script:
     - python --version
+    - kubectl config get-contexts
     - repo=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
     - tag=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['tag'])")
     - url=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['resource_url'])")

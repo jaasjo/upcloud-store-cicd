@@ -4,12 +4,11 @@ stages:
 
 preprocess:
   tags:
-    - tkgm
+    - tkgs
   image: python:bullseye
   stage: preprocess
   script:
     - python --version
-    - kubectl config get-contexts
     - repo=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['repository']['name'])")
     - tag=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['tag'])")
     - url=$(cat $TRIGGER_PAYLOAD | python -mjson.tool | python -c "import sys, json; print(json.load(sys.stdin)['event_data']['resources'][0]['resource_url'])")
@@ -28,6 +27,7 @@ deploy:
   image: bitnami/kubectl:1.24.1
   stage: deploy
   script:
+    - kubectl config get-contexts
     - '[ "$TAG" == "latest" ] && exit 0'
     - kubectl apply -f k8s/"$REPO-service.yml"
     - kubectl apply -f k8s/"$REPO-deployment.yml"

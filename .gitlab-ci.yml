@@ -5,7 +5,7 @@ stages:
 preprocess:
   tags:
     - tkgs
-  image: python:bullseye
+  image: python:latest
   stage: preprocess
   script:
     - python --version
@@ -24,10 +24,11 @@ deploy:
     - tkgm
   dependencies:
     - preprocess
-  image: bitnami/kubectl:1.24.1
+  image: bitnami/kubectl:latest
   stage: deploy
   script:
     - kubectl config get-contexts
+    - kubectl config use-context root/tanzustore_cicd:tkgm-tbs
     - '[ "$TAG" == "latest" ] && exit 0'
     - kubectl apply -f k8s/"$REPO-service.yml"
     - kubectl apply -f k8s/"$REPO-deployment.yml"

@@ -21,7 +21,7 @@ preprocess:
 
 deploy:
   tags:
-    - tkgm
+    - tkgs
   dependencies:
     - preprocess
   image: bitnami/kubectl:latest

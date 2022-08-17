@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: 172.16.228.29/demoapp/frontend:latest
+        image: 192.168.11.6/tanzustore/frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

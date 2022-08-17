@@ -20,6 +20,10 @@ preprocess:
       dotenv: preprocess.env
 
 deploy:
+  environment:
+    name: qa
+    kubernetes:
+      namespace: tanzustore
   tags:
     - tkgs
   dependencies:

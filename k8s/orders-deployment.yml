@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: orders
-        image: 172.16.228.29/demoapp/orders:latest
+        image: 192.168.11.6/tanzustore/orders:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8081

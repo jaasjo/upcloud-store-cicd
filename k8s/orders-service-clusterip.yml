@@ -4,7 +4,7 @@ metadata:
   name: orders
 spec:
   type: ClusterIP
-  clusterIP: 10.101.189.238
+#  clusterIP: 10.101.189.238
   ports:
   - targetPort: 8081
     port: 80

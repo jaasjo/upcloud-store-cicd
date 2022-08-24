@@ -1,0 +1,25 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: store.tanzu.vmlab.fi
+  name: tanzustore
+spec:
+  routes:
+  - conditions:
+    - prefix: /
+    services:
+    - name: frontend
+      port: 80
+  - conditions:
+    - prefix: /api/orders
+    services:
+    - name: orders
+      port: 80
+  - conditions:
+    - prefix: /api/products
+    services:
+    - name: products
+      port: 80
+  virtualhost:
+    fqdn: store.tanzu.vmlab.fi

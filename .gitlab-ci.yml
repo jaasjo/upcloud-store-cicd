@@ -28,7 +28,7 @@ deploy:
   stage: deploy
   script:
     - '[ "$TAG" == "latest" ] && exit 0'
-    - kubectl apply -f k8s/"$REPO-service.yml" -n tanzustore
+    - kubectl apply -f k8s/"$REPO-service-clusterip.yml" -n tanzustore
     - kubectl apply -f k8s/"$REPO-deployment.yml" -n tanzustore
     - kubectl set image deployment.v1.apps/"$REPO" "$REPO"="$URL" -n tanzustore
     #- kubectl patch deployment "$(cat repo.txt)" -p '{"spec":{"template":{"metadata":{"labels":{"CI_PIPELINE_ID":"'$CI_PIPELINE_ID'"}}}}}'

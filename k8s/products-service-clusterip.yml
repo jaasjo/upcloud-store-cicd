@@ -4,7 +4,7 @@ metadata:
   name: products
 spec:
   type: ClusterIP
-  clusterIP: 10.98.203.41
+#  clusterIP: 10.98.203.41
   ports:
   - targetPort: 8082
     port: 80

@@ -3,6 +3,7 @@ kind: HTTPProxy
 metadata:
   name: tanzustore
   annotations:
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     external-dns.alpha.kubernetes.io/hostname: store.tanzu.vmlab.fi
     cert-manager.io/issuer: "tanzustore"
 spec:

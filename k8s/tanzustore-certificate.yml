@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tanzustore-tls
+spec:
+  secretName: tanzustore-tls
+  duration: 170000h
+  renewBefore: 72h
+  issuerRef:
+    kind: Issuer
+    name: tanzustore
+  commonName: "store.tanzu.vmlab.fi"
+  isCA: true
+  dnsNames:
+  - "store.tanzu.vmlab.fi"
